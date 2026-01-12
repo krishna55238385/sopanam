@@ -75,17 +75,62 @@
     <section class="hero">
 
       <div class="hero-video-wrapper">
-        <!-- Fallback Image -->
-        <img src="/images/hero_background.png" alt="Kerala Village" class="hero-fallback-img" fetchpriority="high">
+        <!-- Placeholder Image -->
+        <img src="/images/hero_premium.png" alt="Luxury Kerala Resort" class="hero-fallback-img" fetchpriority="high"
+          style="transition: opacity 1s ease; opacity: 1;">
 
-        <!-- YouTube Iframe -->
-        <iframe class="hero-video-iframe"
-          src="https://www.youtube.com/embed/SBlcSv7WrqM?autoplay=1&mute=1&loop=1&playlist=SBlcSv7WrqM&controls=0&showinfo=0&rel=0&enablejsapi=1&version=3"
-          title="Sopanam Sattva Background" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
+        <!-- YouTube Iframe (Initially hidden) -->
+        <div id="youtube-player"
+          style="position: absolute; top: 50%; left: 50%; width: 177.77777778vh; height: 56.25vw; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); opacity: 0; transition: opacity 1.5s ease; pointer-events: none;">
+        </div>
       </div>
+
+      <script>
+        // Load YouTube IFrame Player API code asynchronously
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+          player = new YT.Player('youtube-player', {
+            videoId: 'SBlcSv7WrqM', // The video ID
+            playerVars: {
+              'autoplay': 1,
+              'controls': 0,
+              'disablekb': 1,
+              'fs': 0,
+              'loop': 1,
+              'modestbranding': 1,
+              'playsinline': 1,
+              'rel': 0,
+              'showinfo': 0,
+              'mute': 1,
+              'playlist': 'SBlcSv7WrqM' // Required for loop to work
+            },
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+          });
+        }
+
+        function onPlayerReady(event) {
+          event.target.mute();
+          event.target.playVideo();
+        }
+
+        function onPlayerStateChange(event) {
+          // When the video starts playing (state=1), fade it in
+          if (event.data === YT.PlayerState.PLAYING) {
+            document.getElementById('youtube-player').style.opacity = '1';
+            // Optional: keeping the image behind provides a fallback if loop gap occurs, but we can fade it out if transparency is involved. 
+            // Here we keep it as a base layer or we can fade it out.
+            document.querySelector('.hero-fallback-img').style.opacity = '0';
+          }
+        }
+      </script>
 
       <div class="hero-overlay"></div>
       <div class="hero-content">
