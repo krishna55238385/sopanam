@@ -105,23 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (menuBtn) {
     menuBtn.addEventListener('click', () => {
-      // For simplicity in this vanilla setup, we'll just toggle a class or alert for now
-      // Ideally, add a class 'open' to nav-links
-      const isOpen = navLinks.style.display === 'flex';
+      // Toggle class 'active' on nav-links
+      navLinks.classList.toggle('active');
 
-      if (isOpen) {
-        navLinks.style.display = 'none';
-      } else {
-        navLinks.style.display = 'flex';
-        navLinks.style.position = 'absolute';
-        navLinks.style.top = '100%';
-        navLinks.style.left = '0';
-        navLinks.style.width = '100%';
-        navLinks.style.backgroundColor = 'white';
-        navLinks.style.flexDirection = 'column';
-        navLinks.style.padding = '2rem';
-        navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
-      }
+      // Optional: Animate hamburger to X (can add .open to btn later if needed)
     });
   }
 });

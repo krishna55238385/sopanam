@@ -890,6 +890,109 @@ video.hero-bg {
 
 .visual-card-text {
   font-size: 1rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-light);
+  /* Fixed var name from muted */
   line-height: 1.6;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (Media Queries)
+   ========================================= */
+
+/* Tablet & Mobile (Below 1024px) */
+@media screen and (max-width: 1024px) {
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-brick);
+    /* Match navbar */
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    gap: 1.5rem;
+    clip-path: circle(0% at 100% 0);
+    /* Hidden state circular reveal animation */
+    transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    pointer-events: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Class to accept from JS for opening menu */
+  .nav-links.active {
+    clip-path: circle(150% at 100% 0);
+    pointer-events: all;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+  }
+}
+
+/* Mobile (Below 768px) */
+@media screen and (max-width: 768px) {
+
+  :root {
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-subtext {
+    font-size: 1.1rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    /* Stack cards */
+  }
+
+  .footer-content {
+    text-align: center;
+  }
+
+  /* Contact Page Grid Stack */
+  .reveal[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Youtube Iframe Mobile - Ensure it covers height */
+  .hero-video-iframe {
+    width: 300%;
+    height: 100%;
+    left: -100%;
+    /* Center it roughly */
+  }
 }
